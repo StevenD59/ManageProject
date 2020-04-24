@@ -1,0 +1,43 @@
+.sizeImg{
+    width: 20%;
+}
+
+.liste{
+    list-style-type:none;
+}
+
+.backgroundMenu{
+    background-color: darkgrey;
+    min-height: 665px;
+    border-top: black 1px solid;
+}
+
+header{
+    background-color: darkgray;
+}
+
+.color_div{
+    background-color: darkgray;
+}
+
+.borderCo{
+    background-color: darkgray;
+}
+
+#panel, #flip {
+    padding: 2px;
+    background-color: darkgray;
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    padding: 7px;
+    display: none;
+}
+
+/* TAILLE TELEPHONE */
+@media (max-width: 575.98px) {
+    .none{
+        display: none;
+    }
+}

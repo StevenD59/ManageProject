@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,12 +73,27 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/edit/{id}", name="edit_user_admin")
+     * @Route("/admin/edit/{id}", name="edit_user_admin", methods={"GET","POST"})
      */
-    public function edit_user($id)
+    public function edit_user(Request $request, User $user): Response
     {
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->remove('password');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setDateUpdate(new \DateTime());
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('edit_user_admin' , ['id'=>$user->getid()]);
+        }
+
         return $this->render('admin/user/edit.html.twig', [
-            'controller_name' => 'AdminController',
+            'form' => $form->createView()
         ]);
     }
 }
+

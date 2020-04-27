@@ -5,11 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -189,14 +190,14 @@ class User
         return $this;
     }
 
-    public function getBoolean(): ?bool
+    public function getActivate(): ?bool
     {
-        return $this->boolean;
+        return $this->activate;
     }
 
-    public function setBoolean(bool $boolean): self
+    public function setActivate(bool $activate): self
     {
-        $this->boolean = $boolean;
+        $this->activate = $activate;
 
         return $this;
     }
@@ -292,5 +293,43 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+
+        public function getRoles(): array
+    {
+        $roles = [];
+        $roles[] = $this->role;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // you may need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
     }
 }

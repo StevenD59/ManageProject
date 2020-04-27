@@ -1,4 +1,4 @@
-$
+{% extends 'admin/index.html.twig' %}
 
 {% block title %}{% endblock %}
 
@@ -7,7 +7,6 @@ $
         <h1 class="mb-5">Ajouter un participant</h1>
         <div class="col-12 col-md-8 color_div mx-auto rounded p-2">
             {{ form_start(form) }}
-            <form>
                 <div class="form-group row">
                     <label for="nom" class="col-sm-3 col-form-label mx-auto">Nom:</label>
                     <div class="col-sm-8 mx-auto">
@@ -35,14 +34,11 @@ $
                 <div class="form-group row">
                     <label for="role" class="col-sm-3 col-form-label mx-auto">Role:</label>
                     <div class="col-sm-8 mx-auto">
-                        <select class="form-control form-control-md" id="role">
-                            <option>ROLE_USER</option>
-                            <option>ROLE_ADMIN</option>
-                        </select>
+                        {{ form_widget(form.role) }}
                     </div>
                 </div>
-            </form>
         </div>
-        <button type="button" class="btn btn-light mt-3">Ajouter</button>
+        <button type="submit" class="btn btn-light mt-3">Ajouter</button>
     </div>
+    {{ form_end(form) }}
 {% endblock %}

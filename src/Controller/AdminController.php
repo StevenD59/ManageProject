@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
@@ -24,31 +25,34 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="admin_index")
      */
     public function index()
     {
         $users = $this->userRepository->findAll();
 
         return $this->render('admin/user/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'user' => $users,
+            'title' => 'Liste des participants'
         ]);
     }
 
     /**
      * @Route("/admin/new", name="new_user_admin")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin_index');
         }
 
         return $this->render('admin/user/new.html.twig', [
@@ -58,19 +62,19 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/show", name="show_user_admin")
+     * @Route("/admin/show/{id}", name="show_user_admin", methods={"GET"})
      */
-    public function show_user()
+    public function show_user(User $user)
     {
         return $this->render('admin/user/show.html.twig', [
-            'controller_name' => 'AdminController',
+            'user' => $user
         ]);
     }
 
     /**
-     * @Route("/admin/edit", name="edit_user_admin")
+     * @Route("/admin/edit/{id}", name="edit_user_admin")
      */
-    public function edit_user()
+    public function edit_user($id)
     {
         return $this->render('admin/user/edit.html.twig', [
             'controller_name' => 'AdminController',

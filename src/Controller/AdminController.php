@@ -88,12 +88,28 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('edit_user_admin' , ['id'=>$user->getid()]);
+            return $this->redirectToRoute('edit_user_admin', ['id' => $user->getid()]);
         }
 
         return $this->render('admin/user/edit.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin/delete/{id}", name="delete_user_admin", methods={"DELETE"})
+     */
+    public function delete(Request $request, User $user): Response
+    {
+        dd($request);
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }else{
+            dd($request);
+        }
+        return $this->redirectToRoute('admin_index');
     }
 }
 

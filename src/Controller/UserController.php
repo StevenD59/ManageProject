@@ -5,72 +5,132 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("/user")
+ * @Route("/admin")
  */
+
+
 class UserController extends AbstractController
 {
+
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @var UserRepository
      */
-    public function index(UserRepository $userRepository): Response
+    private $userRepository;
+
+    public function __construct(UserRepository $usersRepository)
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+        $this->userRepository = $usersRepository;
+    }
+
+
+    //    -------------- CRUD USER / INDEX-SHOWALL ----------------------
+
+    /**
+     * @Route("/users", name="admin_index")
+     */
+    public function index()
+    {
+        $users = $this->userRepository->findAll();
+        return $this->render('admin/user/index.html.twig', [
+            'user' => $users,
+            'title' => 'Liste des participants'
         ]);
     }
 
-    /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
-     */
-
+    //    -------------- CRUD USER / CREATE ----------------------
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("/new", name="new_user_admin")
      */
-    public function show(User $user): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, User $user): Response
-    {
+        $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('admin_index');
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('admin/user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
     }
 
+    //    -------------- CRUD USER / INDEX-SHOWById ----------------------
+
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("/show/{id}", name="show_user_admin", methods={"GET"})
+     */
+    public function show_user(User $user)
+    {
+        return $this->render('admin/user/show.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+
+    //    -------------- CRUD USER / EDIT ----------------------
+
+    /**
+     * @Route("/edit/{id}", name="edit_user_admin", methods={"GET","POST"})
+     */
+    public function edit_user(Request $request, User $user): Response
+    {
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->remove('password');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setDateUpdate(new \DateTime());
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_index');
+        }
+
+        return $this->render('admin/user/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    //    -------------- CRUD USER / DELETE ----------------------
+
+    /**
+     * @Route("/delete/{id}", name="delete_user_admin", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        dd($request);
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
+        }else{
+            dd($request);
         }
-
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('admin_index');
     }
+
+
+    // ---------------------------- CRUD PROJECT ---------------------------------------------
+
+
 }
+

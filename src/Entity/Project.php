@@ -64,7 +64,7 @@ class Project
     private $activate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projects")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

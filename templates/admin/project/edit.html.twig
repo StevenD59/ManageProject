@@ -1,13 +1,55 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Project{% endblock %}
+{% extends 'admin/index.html.twig' %}
 
 {% block body %}
-    <h1>Edit Project</h1>
+   {% extends 'admin/index.html.twig' %}
 
-    {{ include('project/_form.html.twig', {'button_label': 'Update'}) }}
+{% block body %}
+    <div class="col-12 col-md-10 text-center">
+        <h1 class="mb-5">Modifier un projet</h1>
+        <div class="col-12 col-md-9 color_div mx-auto rounded p-2">
+            {{ form_start(form) }}
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label mx-auto">Nom du projet:</label>
+                <div class="col-sm-8 mx-auto">
+                    {{ form_widget(form.nom) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-sm-3 col-form-label mx-auto">Description:</label>
+                <div class="col-sm-8 mx-auto">
+                    {{ form_widget(form.description) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dateDebut" class="col-sm-3 col-form-label mx-auto">Date de début:</label>
+                <div class="col-sm-8">
+                    {{ form_widget(form.date_debut) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dateFin" class="col-sm-3 col-form-label mx-auto">Date de fin:</label>
+                <div class="col-sm-8">
+                    {{ form_widget(form.date_fin) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="mx-auto">
+                    <label for="exampleFormControlFile1">Télécharger une image</label>
+                    <div class="col-12">
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                </div>
+            </div>
 
-    <a href="{{ path('project_index') }}">back to list</a>
-
-    {{ include('project/_delete_form.html.twig') }}
+            <div class="mx-auto row">
+                <div class="col-12 col-lg-4 rounded" id="flip">Ajouter un participant</div>
+                <div class="col-12 col-lg-4" id="panel">
+                    <input type="checkbox" id="participant" name="scales">
+                    <label for="participant">Participant 1</label>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-light">Ajouter</button>
+    </div>
 {% endblock %}
+

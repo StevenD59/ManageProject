@@ -11,8 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * Class ProjectController
+ * @package App\Controller
  * @Route("/project")
  */
+
 class ProjectController extends AbstractController
 {
     /**
@@ -20,7 +23,7 @@ class ProjectController extends AbstractController
      */
     public function index(ProjectRepository $projectRepository): Response
     {
-        return $this->render('project/index.html.twig', [
+        return $this->render('admin/project/index.html.twig', [
             'projects' => $projectRepository->findAll(),
         ]);
     }
@@ -42,18 +45,18 @@ class ProjectController extends AbstractController
             return $this->redirectToRoute('project_index');
         }
 
-        return $this->render('project/new.html.twig', [
+        return $this->render('admin/project/new.html.twig', [
             'project' => $project,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="project_show", methods={"GET"})
+     * @Route("/show/{id}", name="project_show", methods={"GET"})
      */
     public function show(Project $project): Response
     {
-        return $this->render('project/show.html.twig', [
+        return $this->render('admin/project/show.html.twig', [
             'project' => $project,
         ]);
     }
@@ -72,7 +75,7 @@ class ProjectController extends AbstractController
             return $this->redirectToRoute('project_index');
         }
 
-        return $this->render('project/edit.html.twig', [
+        return $this->render('admin/project/edit.html.twig', [
             'project' => $project,
             'form' => $form->createView(),
         ]);

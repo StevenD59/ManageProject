@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\Project;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProjectType extends AbstractType
 {
@@ -13,15 +16,21 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('description')
-            ->add('image_name')
-            ->add('date_debut')
-            ->add('date_fin')
-            ->add('date_add')
-            ->add('date_update')
-            ->add('date_delete')
-            ->add('activate')
-            ->add('user')
+            ->add('description', TextareaType::class)
+            ->add('image_name', FileType::class, [
+                'label' => 'Choisissez votre fichier'
+            ])
+//            ->add('date_debut', DateType::class, [
+//                'widget' => 'single_text',
+//                'html5' => false,
+//                'attr' => ['class' => 'js-datepicker']
+//            ])
+//            ->add('date_fin', DateType::class, [
+//                'widget' => 'single_text',
+//                'html5' => false,
+//                'attr' => ['class' => 'js-datepicker']
+
+//            ->add('user')
         ;
     }
 

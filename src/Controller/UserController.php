@@ -129,8 +129,19 @@ class UserController extends AbstractController
     }
 
 
-    // ---------------------------- CRUD PROJECT ---------------------------------------------
+    // ---------------------------- CONNEXION ---------------------------------------------
 
+    /**
+     * @Route("/connexion", name="security_login")
+     */
+    public function login()
+    {
+        return $this->render('admin/user/login.html.twig');
+    }
+    /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logout() { }
 
 }
 

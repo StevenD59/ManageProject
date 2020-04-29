@@ -17,20 +17,20 @@ class ProjectType extends AbstractType
         $builder
             ->add('nom')
             ->add('description', TextareaType::class)
-            ->add('image_name', FileType::class, [
-                'label' => 'Choisissez votre fichier'
+            ->add('image_name', FileType::class, ['attr' =>
+                ['placeholder' => 'Choisissez votre fichier']])
+            ->add('date_debut', DateType::class, [
+                'widget' => 'single_text',
+                'html5'=> false,
+                'format'=> 'dd/MM/yyyy',
+                'translation_domain' => false
             ])
-//            ->add('date_debut', DateType::class, [
-//                'widget' => 'single_text',
-//                'html5' => false,
-//                'attr' => ['class' => 'js-datepicker']
-//            ])
-//            ->add('date_fin', DateType::class, [
-//                'widget' => 'single_text',
-//                'html5' => false,
-//                'attr' => ['class' => 'js-datepicker']
-
-//            ->add('user')
+            ->add('date_fin', DateType::class, [
+                'widget' => 'single_text',
+                'html5'=> false,
+                'format'=> 'dd/MM/yyyy',
+                'translation_domain' => false
+            ])//            ->add('user')
         ;
     }
 

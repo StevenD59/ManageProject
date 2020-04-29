@@ -83,6 +83,8 @@ class Project
     {
         $this->userProjects = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->date_add = new \DateTime();
+        $this->activate = 1;
     }
 
     public function getId(): ?int
@@ -114,12 +116,12 @@ class Project
         return $this;
     }
 
-    public function getImageName(): ?string
+    public function getImageName()
     {
         return $this->image_name;
     }
 
-    public function setImageName(string $image_name): self
+    public function setImageName($image_name)
     {
         $this->image_name = $image_name;
 

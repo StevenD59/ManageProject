@@ -1,0 +1,21 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block body %}
+    <form action="{{ path('security_login') }}" method="POST">
+    <div class="row container-fluid mx-auto">
+        <div class="col-10 col-xl-4 p-4 mx-auto rounded borderCo">
+                <div class="row mb-2">
+                    <label for="email" class="">Email:</label>
+                    <input type="email" id="email" class="form-control" name="_username" placeholder="E-mail">
+                </div>
+                <div class="row my-auto">
+                    <label for="password" class="">Mot de passe:</label>
+                    <input type="password" id="password" class="form-control" name="_password" placeholder="Votre mot de passe">
+                </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-light mt-4">Se connecter</button>
+    </div>
+    </form>
+{% endblock %}

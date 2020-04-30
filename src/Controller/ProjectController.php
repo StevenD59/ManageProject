@@ -82,7 +82,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/show/{id}", name="project_show", methods={"GET","POST"})
      */
-    public function show(Project $project, Request $request, Commentaire $commentaireShow): Response
+    public function show(Project $project, UserRepository $userRepository, Request $request): Response
     {
 
         $commentaire = new Commentaire();
@@ -98,14 +98,17 @@ class ProjectController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('project_show',[
-                'id'=>$project->getId()
+                'id'=>$project->getId(),
             ]);
 
         }
 
+        $commentaire = $project->getCommentaires();
+
+
         return $this->render('admin/project/show.html.twig', [
             'project'=> $project,
-           'commentaire'=> $commentaireShow,
+           'commentaire'=> $commentaire,
            'form'=> $form->createView()
         ]);
     }

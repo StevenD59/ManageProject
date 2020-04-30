@@ -7,7 +7,7 @@
         <div class="col-12 col-md-9 mb-4 color_div mx-auto rounded p-2">
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <img class="img-fluid" src="{{asset('assets/img/' ~ project.imageName )}}" alt="">
+                    <img class="img-fluid" src="{{ asset('assets/img/' ~ project.imageName ) }}" alt="">
                 </div>
                 <div class="col-12 col-md-6">
                     <p>{{ project.description }}</p>
@@ -51,17 +51,17 @@
                 </table>
             </div>
             <h5 class="bg-dark mt-3 text-white">Commentaires</h5>
+            {% for com in commentaire %}
             <div class="row border col-10 mx-auto p-0">
-                {{ form_start(form) }}
-                {%  %}
-                <div class="col-4">
-                    <p>Nom user</p>
-                </div>
-                <div class="col-8">
-                    <p>Test commentaire</p>
-                </div>
+                    <div class="col-4">
+                        <p>{{ com.user.prenom }}</p>
+                    </div>
+                    <div class="col-8">
+                        <p>{{ com.avis }}</p>
+                    </div>
             </div>
-
+            {% endfor %}
+            {{ form_start(form) }}
             <div class="row col-11 mx-auto mt-5">
                 <div class="col-12">
                     {{ form_widget(form.avis) }}

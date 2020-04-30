@@ -4,10 +4,6 @@
     <list default="true" id="80768667-586e-4b52-a0cc-e6affd7c7e76" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Commentaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Commentaire.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Project.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/UserProject.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/UserProject.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/project/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/project/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -186,7 +182,7 @@
       <workItem from="1588061460429" duration="17001000" />
       <workItem from="1588096331325" duration="753000" />
       <workItem from="1588144810029" duration="22351000" />
-      <workItem from="1588233080522" duration="10506000" />
+      <workItem from="1588233080522" duration="13035000" />
     </task>
     <servers />
   </component>

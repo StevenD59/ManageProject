@@ -22,13 +22,13 @@ class ProjectType extends AbstractType
             ->add('date_debut', DateType::class, [
                 'widget' => 'single_text',
                 'html5'=> false,
-                'format'=> 'dd/MM/yyyy',
+                'format' => 'yyyy-MM-dd',
                 'translation_domain' => false
             ])
             ->add('date_fin', DateType::class, [
                 'widget' => 'single_text',
                 'html5'=> false,
-                'format'=> 'dd/MM/yyyy',
+                'format' => 'yyyy-MM-dd',
                 'translation_domain' => false
             ])//            ->add('user')
         ;

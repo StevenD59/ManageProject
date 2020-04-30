@@ -18,7 +18,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for projet in projects %}
+                {% for projet in project %}
                 <tr>
                     <th scope="row">{{ projet.nom }}</th>
                     <td class="pt-3 d-md-none ">
@@ -30,9 +30,7 @@
                     </td>
                     <td class="d-none d-md-block">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Voir
-                            </label>
+                            <a class="btn btn-secondary" href="{{ path('project_show', {'id' : projet.id }) }}">Voir</a>
                             <label class="btn btn-secondary">
                                 <input type="radio" name="options" id="option2" autocomplete="off"> Modifier
                             </label>

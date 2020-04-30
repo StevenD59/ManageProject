@@ -7,7 +7,11 @@
 
         </div>
         <div class="col-4 col-md-2 align-self-center text-right">
+            {% if app.user %}
+            <a type="button" href="{{ path('security_logout') }}" class="btn-sm btn-outline-dark ml-3">Deconnexion</a>
+            {% else %}
             <a type="button" href="{{ path('security_login') }}" class="btn-sm btn-outline-dark ml-3">Connexion</a>
+            {% endif %}
         </div>
     </div>
 </header>

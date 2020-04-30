@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
@@ -21,20 +22,34 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProjectController extends AbstractController
 {
+
+    /**
+     * @var ProjectRepository
+     */
+    private $projectRepository;
+
+    public function __construct(ProjectRepository $projectRepository)
+    {
+        $this->projectRepository = $projectRepository;
+    }
+
+
     /**
      * @Route("/", name="project_index", methods={"GET"})
      */
     public function index(ProjectRepository $projectRepository): Response
     {
+        $project = $this->projectRepository->findAll();
+
         return $this->render('admin/project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
+            'project' => $project,
         ]);
     }
 
     /**
      * @Route("/new", name="project_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserRepository $userRepository): Response
+    public function new(Request $request, UserRepository $userRepository, UserInterface $userTest): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
@@ -46,7 +61,8 @@ class ProjectController extends AbstractController
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('upload_directory'), $fileName);
             $project->setImageName($fileName);
-            $user = $userRepository->find(1);
+            $userId = $userTest->getId();
+            $user = $userRepository->find($userId);
             $project->setUser($user);
             $entityManager->persist($project);
             $entityManager->flush();

@@ -18,7 +18,9 @@
 {% include 'admin/partial/header.html.twig' %}
 {% include 'admin/partial/navbar.html.twig' %}
 <div class="row m-0">
+    {% if app.user %}
 {% include 'admin/partial/menu.html.twig' %}
+    {% endif %}
 {% block body %}{% endblock %}
 </div>
 

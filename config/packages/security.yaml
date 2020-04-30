@@ -19,10 +19,10 @@ security:
             form_login:
                 login_path: security_login
                 check_path: security_login
-                default_target_path: /admin
+                default_target_path: admin_index
             logout:
                 path: security_logout
-                target: /admin/connexion
+                target: security_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

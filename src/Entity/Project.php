@@ -92,6 +92,10 @@ class Project
         return $this->id;
     }
 
+    public function __toString() {
+        return (string) $this->getId();
+    }
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -273,4 +277,5 @@ class Project
 
         return $this;
     }
+
 }

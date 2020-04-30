@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Project;
 use App\Entity\User;
+use App\Form\CommentaireType;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
@@ -78,12 +80,33 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="project_show", methods={"GET"})
+     * @Route("/show/{id}", name="project_show", methods={"GET","POST"})
      */
-    public function show(Project $project): Response
+    public function show(Project $project, Request $request, Commentaire $commentaireShow): Response
     {
+
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+        $users = $this->getUser();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $commentaire->setProject($project);
+            $commentaire->setUser($users);
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('project_show',[
+                'id'=>$project->getId()
+            ]);
+
+        }
+
         return $this->render('admin/project/show.html.twig', [
-            'project' => $project,
+            'project'=> $project,
+           'commentaire'=> $commentaireShow,
+           'form'=> $form->createView()
         ]);
     }
 
@@ -119,4 +142,8 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('project_index');
     }
+
+
+
+
 }

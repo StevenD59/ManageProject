@@ -52,9 +52,10 @@
             </div>
             <h5 class="bg-dark mt-3 text-white">Commentaires</h5>
             <div class="row border col-10 mx-auto p-0">
+                {{ form_start(form) }}
+                {%  %}
                 <div class="col-4">
-                    <img class="img-fluid mt-1 rounded" src="img/avatar.jpg" alt="">
-                    <figcaption>Nom user</figcaption>
+                    <p>Nom user</p>
                 </div>
                 <div class="col-8">
                     <p>Test commentaire</p>
@@ -63,12 +64,12 @@
 
             <div class="row col-11 mx-auto mt-5">
                 <div class="col-12">
-                    <textarea class="form-control" id="description" rows="2"></textarea>
+                    {{ form_widget(form.avis) }}
                     <div class="text-right mt-3">
-                        <button type="button" class="btn btn-light text-right">Poster</button>
+                        <button type="submit" class="btn btn-light text-right">Poster</button>
                     </div>
                 </div>
-
+                {{ form_end(form) }}
 
             </div>
         </div>

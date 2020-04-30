@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,16 +43,24 @@ class Commentaire
     private $activate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\project", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;
+
+    public function __construct()
+    {
+        $this->userProjects = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
+        $this->date_add = new \DateTime();
+        $this->activate = 1;
+    }
 
     public function getId(): ?int
     {

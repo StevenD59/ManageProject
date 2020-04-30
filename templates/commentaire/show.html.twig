@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentaire{% endblock %}
+
+{% block body %}
+    <h1>Commentaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Avis</th>
+                <td>{{ commentaire.avis }}</td>
+            </tr>
+            <tr>
+                <th>Date_add</th>
+                <td>{{ commentaire.dateAdd ? commentaire.dateAdd|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_update</th>
+                <td>{{ commentaire.dateUpdate ? commentaire.dateUpdate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_delete</th>
+                <td>{{ commentaire.dateDelete ? commentaire.dateDelete|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Activate</th>
+                <td>{{ commentaire.activate ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('commentaire_index') }}">back to list</a>
+
+    <a href="{{ path('commentaire_edit', {'id': commentaire.id}) }}">edit</a>
+
+    {{ include('commentaire/_delete_form.html.twig') }}
+{% endblock %}

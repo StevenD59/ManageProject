@@ -3,20 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="80768667-586e-4b52-a0cc-e6affd7c7e76" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/js.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/js.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/5f0744a2eb684b05c902786b26475fc4.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/5f0744a2eb684b05c902786b26475fc4.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/7b32a4b3f5fff0c5800c374a2c593824.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/7b32a4b3f5fff0c5800c374a2c593824.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/ad2ed5f1b2bce13bb96ed02333002846.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/img/ad2ed5f1b2bce13bb96ed02333002846.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProjectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ProjectType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProjectType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partial/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partial/header.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/project/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/project/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Commentaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Commentaire.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/UserProject.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/UserProject.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/project/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/project/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +186,7 @@
       <workItem from="1588061460429" duration="17001000" />
       <workItem from="1588096331325" duration="753000" />
       <workItem from="1588144810029" duration="22351000" />
-      <workItem from="1588233080522" duration="1406000" />
+      <workItem from="1588233080522" duration="10506000" />
     </task>
     <servers />
   </component>
@@ -202,10 +194,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="498" y="166" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588076544423">
+    <state x="498" y="166" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588235384886">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="498" y="166" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588076544423" />
+    <state x="498" y="166" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588235384886" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1588073841757">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

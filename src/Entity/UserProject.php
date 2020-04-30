@@ -32,13 +32,13 @@ class UserProject
     private $date_delete;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="userProjects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userProjects")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\project", inversedBy="userProjects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="userProjects")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;

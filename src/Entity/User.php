@@ -94,6 +94,10 @@ class User implements UserInterface
         return $this->id;
     }
 
+    public function __toString() {
+        return (string) $this->getId();
+    }
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -299,7 +303,7 @@ class User implements UserInterface
      * @inheritDoc
      */
 
-        public function getRoles(): array
+    public function getRoles(): array
     {
         $roles = [];
         $roles[] = $this->role;
@@ -332,4 +336,7 @@ class User implements UserInterface
     public function eraseCredentials()
     {
     }
+
+
+
 }

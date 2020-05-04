@@ -2,6 +2,10 @@
     width: 20%;
 }
 
+.index{
+    z-index: 0;
+}
+
 .liste{
     list-style-type:none;
 }

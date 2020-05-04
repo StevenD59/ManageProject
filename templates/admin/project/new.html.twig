@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="col-12 col-md-10 text-center">
-        <h1 class="mb-5">Ajouter un projet</h1>
+        <h1 class="my-3">Ajouter un projet</h1>
         <div class="col-12 col-md-9 color_div mx-auto rounded p-2">
             {{ form_start(form) }}
                 <div class="form-group row">
@@ -19,13 +19,13 @@
                 </div>
                 <div class="form-group row">
                     <label for="dateDebut" class="col-sm-3 col-form-label mx-auto">Date de début:</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8 mx-auto">
                         {{ form_widget(form.date_debut, {'attr': {'class': 'js-datepicker'} }) }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="dateFin" class="col-sm-3 col-form-label mx-auto">Date de fin:</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8 mx-auto">
                         {{ form_widget(form.date_fin, {'attr': {'class': 'js-datepicker'} }) }}
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="mx-auto row">
                     <div class="col-12 col-lg-4 rounded" id="flip">Ajouter un participant</div>
                     <div class="col-12 col-lg-4" id="panel">
-                        {{ form_widget(form.usersProjects) }}
+                        {{ form_widget(form.usersProjects, { 'attr':{'class':'text-left index'} }) }}
                     </div>
                 </div>
         </div>

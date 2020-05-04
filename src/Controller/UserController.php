@@ -117,7 +117,6 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user): Response
     {
-        dd($request);
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);

@@ -42,16 +42,18 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% for user in project.usersProjects %}
                     <tr>
-                        <td>Delchambre</td>
-                        <td>Steven</td>
-                        <td class="none">Exemple@gmail.com</td>
+                        <td>{{user.nom}}</td>
+                        <td>{{user.prenom}}</td>
+                        <td class="none">{{user.mail}}</td>
                     </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
             <h5 class="bg-dark mt-3 text-white">Commentaires</h5>
-            {% for com in commentaire %}
+            {% for com in project.commentaires %}
             <div class="row border col-10 mx-auto p-0">
                     <div class="col-4">
                         <p>{{ com.user.prenom }}</p>

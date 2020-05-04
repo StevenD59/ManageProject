@@ -103,12 +103,9 @@ class ProjectController extends AbstractController
 
         }
 
-        $commentaire = $project->getCommentaires();
-
 
         return $this->render('admin/project/show.html.twig', [
             'project'=> $project,
-           'commentaire'=> $commentaire,
            'form'=> $form->createView()
         ]);
     }
@@ -122,13 +119,16 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $project->setDateUpdate(new \DateTime());
+            $entityManager->persist($project);
+            $entityManager->flush();
+
             return $this->redirectToRoute('project_index');
         }
 
         return $this->render('admin/project/edit.html.twig', [
-            'project' => $project,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 

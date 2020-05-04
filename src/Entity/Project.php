@@ -69,22 +69,28 @@ class Project
      */
     private $user;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="project")
-     */
-    private $userProjects;
+
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="project", orphanRemoval=true)
      */
     private $commentaires;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="usersProjects", orphanRemoval=true)
+     */
+    private $usersProjects;
+
+
+
     public function __construct()
     {
-        $this->userProjects = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->date_add = new \DateTime();
         $this->activate = 1;
+        $this->users = new ArrayCollection();
+        $this->usersProjects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -216,36 +222,7 @@ class Project
         return $this;
     }
 
-    /**
-     * @return Collection|UserProject[]
-     */
-    public function getUserProjects(): Collection
-    {
-        return $this->userProjects;
-    }
 
-    public function addUserProject(UserProject $userProject): self
-    {
-        if (!$this->userProjects->contains($userProject)) {
-            $this->userProjects[] = $userProject;
-            $userProject->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserProject(UserProject $userProject): self
-    {
-        if ($this->userProjects->contains($userProject)) {
-            $this->userProjects->removeElement($userProject);
-            // set the owning side to null (unless already changed)
-            if ($userProject->getProject() === $this) {
-                $userProject->setProject(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Commentaire[]
@@ -273,6 +250,62 @@ class Project
             if ($commentaire->getProject() === $this) {
                 $commentaire->setProject(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addUserProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeUserProject($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsersProjects(): Collection
+    {
+        return $this->usersProjects;
+    }
+
+    public function addUsersProject(User $usersProject): self
+    {
+        if (!$this->usersProjects->contains($usersProject)) {
+            $this->usersProjects[] = $usersProject;
+            $usersProject->addUsersProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersProject(User $usersProject): self
+    {
+        if ($this->usersProjects->contains($usersProject)) {
+            $this->usersProjects->removeElement($usersProject);
+            $usersProject->removeUsersProject($this);
         }
 
         return $this;

@@ -69,24 +69,27 @@ class User implements UserInterface
      */
     private $projects;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="user")
-     */
-    private $userProjects;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="user")
      */
     private $commentaires;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Project", mappedBy="usersProjects")
+     */
+    private $usersProjects;
+
+
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
-        $this->userProjects = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->activate = 1;
         $this->date_add = new \DateTime();
         $this->role = 'ROLE_USER';
+        $this->usersProjects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -237,36 +240,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|UserProject[]
-     */
-    public function getUserProjects(): Collection
-    {
-        return $this->userProjects;
-    }
-
-    public function addUserProject(UserProject $userProject): self
-    {
-        if (!$this->userProjects->contains($userProject)) {
-            $this->userProjects[] = $userProject;
-            $userProject->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserProject(UserProject $userProject): self
-    {
-        if ($this->userProjects->contains($userProject)) {
-            $this->userProjects->removeElement($userProject);
-            // set the owning side to null (unless already changed)
-            if ($userProject->getUser() === $this) {
-                $userProject->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Commentaire[]
@@ -336,6 +309,34 @@ class User implements UserInterface
     public function eraseCredentials()
     {
     }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getUsersProjects(): Collection
+    {
+        return $this->usersProjects;
+    }
+
+    public function addUsersProject(Project $usersProject): self
+    {
+        if (!$this->usersProjects->contains($usersProject)) {
+            $this->usersProjects[] = $usersProject;
+        }
+
+        return $this;
+    }
+
+    public function removeUsersProject(Project $usersProject): self
+    {
+        if ($this->usersProjects->contains($usersProject)) {
+            $this->usersProjects->removeElement($usersProject);
+        }
+
+        return $this;
+    }
+
+
 
 
 

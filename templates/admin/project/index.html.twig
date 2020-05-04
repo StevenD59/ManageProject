@@ -10,15 +10,15 @@
             </a>
         </div>
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th class="col-6">Nom du projet</th>
-                    <th class="col-6">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for projet in project %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col-6">Nom du projet</th>
+                <th class="col-6">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for projet in project %}
                 <tr>
                     <th scope="row">{{ projet.nom }}</th>
                     <td class="pt-3 d-md-none ">
@@ -30,19 +30,22 @@
                     </td>
                     <td class="d-none d-md-block">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <a class="btn btn-secondary" href="{{ path('project_show', {'id' : projet.id }) }}">Voir</a>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> Modifier
-                            </label>
-                            <label class="btn btn-danger">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Supprimer
-                            </label>
+                            <div>
+                                <a class="btn btn-secondary"
+                                   href="{{ path('project_show', {'id' : projet.id }) }}">Voir</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-secondary" href="{{ path('project_edit', {'id' : projet.id }) }}">Modifier</a>
+                            </div>
+                            <div>
+                                {{ include('admin/project/_delete_form.html.twig') }}
+                            </div>
                         </div>
                     </td>
                 </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            {% endfor %}
+            </tbody>
+        </table>
 
     </div>
 {% endblock %}

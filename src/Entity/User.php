@@ -80,6 +80,13 @@ class User implements UserInterface
      */
     private $usersProjects;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tache", mappedBy="user", orphanRemoval=true)
+     */
+    private $taches;
+
+
+
 
 
     public function __construct()
@@ -90,6 +97,7 @@ class User implements UserInterface
         $this->date_add = new \DateTime();
         $this->role = 'ROLE_USER';
         $this->usersProjects = new ArrayCollection();
+        $this->taches = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -336,8 +344,37 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Tache[]
+     */
+    public function getTaches(): Collection
+    {
+        return $this->taches;
+    }
 
+    public function addTach(Tache $tach): self
+    {
+        if (!$this->taches->contains($tach)) {
+            $this->taches[] = $tach;
+            $tach->setUser($this);
+        }
 
+        return $this;
+    }
 
+    public function removeTach(Tache $tach): self
+    {
+        if ($this->taches->contains($tach)) {
+            $this->taches->removeElement($tach);
+            // set the owning side to null (unless already changed)
+            if ($tach->getUser() === $this) {
+                $tach->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 
 }

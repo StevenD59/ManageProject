@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommentaireRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
-class Commentaire
+class Image
 {
     /**
      * @ORM\Id()
@@ -18,9 +17,9 @@ class Commentaire
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
-    private $avis;
+    private $nom;
 
     /**
      * @ORM\Column(type="datetime")
@@ -43,44 +42,24 @@ class Commentaire
     private $activate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $project;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tache", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tache", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tache;
-
-    public function __construct()
-    {
-        $this->userProjects = new ArrayCollection();
-        $this->commentaires = new ArrayCollection();
-        $this->date_add = new \DateTime();
-        $this->activate = 1;
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAvis(): ?string
+    public function getNom(): ?string
     {
-        return $this->avis;
+        return $this->nom;
     }
 
-    public function setAvis(string $avis): self
+    public function setNom(string $nom): self
     {
-        $this->avis = $avis;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -133,30 +112,6 @@ class Commentaire
         return $this;
     }
 
-    public function getUser(): ?user
-    {
-        return $this->user;
-    }
-
-    public function setUser(?user $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getProject(): ?project
-    {
-        return $this->project;
-    }
-
-    public function setProject(?project $project): self
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
     public function getTache(): ?Tache
     {
         return $this->tache;
@@ -168,5 +123,4 @@ class Commentaire
 
         return $this;
     }
-
 }

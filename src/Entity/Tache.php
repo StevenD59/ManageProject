@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TacheRepository")
  */
-class Project
+class Tache
 {
     /**
      * @ORM\Id()
@@ -31,17 +31,17 @@ class Project
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image_name;
-
-    /**
-     * @ORM\Column(type="date")
-     */
     private $date_debut;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
     private $date_fin;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statut;
 
     /**
      * @ORM\Column(type="datetime")
@@ -64,48 +64,38 @@ class Project
     private $activate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="taches")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $project;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="taches")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
-
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="project", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="tache", orphanRemoval=true)
      */
     private $commentaires;
 
-
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="usersProjects", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="tache", orphanRemoval=true)
      */
-    private $usersProjects;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Tache", mappedBy="project", orphanRemoval=true)
-     */
-    private $taches;
-
-
-
+    private $images;
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->images = new ArrayCollection();
         $this->date_add = new \DateTime();
         $this->activate = 1;
-        $this->usersProjects = new ArrayCollection();
-        $this->taches = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function __toString() {
-        return (string) $this->getId();
     }
 
     public function getNom(): ?string
@@ -132,38 +122,38 @@ class Project
         return $this;
     }
 
-    public function getImageName()
-    {
-        return $this->image_name;
-    }
-
-    public function setImageName($image_name)
-    {
-        $this->image_name = $image_name;
-
-        return $this;
-    }
-
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDateDebut(): ?string
     {
         return $this->date_debut;
     }
 
-    public function setDateDebut(\DateTimeInterface $date_debut): self
+    public function setDateDebut(string $date_debut): self
     {
         $this->date_debut = $date_debut;
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getDateFin(): ?string
     {
         return $this->date_fin;
     }
 
-    public function setDateFin(\DateTimeInterface $date_fin): self
+    public function setDateFin(string $date_fin): self
     {
         $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }
@@ -216,19 +206,29 @@ class Project
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
-
-
 
     /**
      * @return Collection|Commentaire[]
@@ -242,7 +242,7 @@ class Project
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires[] = $commentaire;
-            $commentaire->setProject($this);
+            $commentaire->setTache($this);
         }
 
         return $this;
@@ -253,72 +253,42 @@ class Project
         if ($this->commentaires->contains($commentaire)) {
             $this->commentaires->removeElement($commentaire);
             // set the owning side to null (unless already changed)
-            if ($commentaire->getProject() === $this) {
-                $commentaire->setProject(null);
+            if ($commentaire->getTache() === $this) {
+                $commentaire->setTache(null);
             }
         }
 
         return $this;
     }
 
-
     /**
-     * @return Collection|User[]
+     * @return Collection|Image[]
      */
-    public function getUsersProjects(): Collection
+    public function getImages(): Collection
     {
-        return $this->usersProjects;
+        return $this->images;
     }
 
-    public function addUsersProject(User $usersProject): self
+    public function addImage(Image $image): self
     {
-        if (!$this->usersProjects->contains($usersProject)) {
-            $this->usersProjects[] = $usersProject;
-            $usersProject->addUsersProject($this);
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setTache($this);
         }
 
         return $this;
     }
 
-    public function removeUsersProject(User $usersProject): self
+    public function removeImage(Image $image): self
     {
-        if ($this->usersProjects->contains($usersProject)) {
-            $this->usersProjects->removeElement($usersProject);
-            $usersProject->removeUsersProject($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tache[]
-     */
-    public function getTaches(): Collection
-    {
-        return $this->taches;
-    }
-
-    public function addTach(Tache $tach): self
-    {
-        if (!$this->taches->contains($tach)) {
-            $this->taches[] = $tach;
-            $tach->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTach(Tache $tach): self
-    {
-        if ($this->taches->contains($tach)) {
-            $this->taches->removeElement($tach);
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
             // set the owning side to null (unless already changed)
-            if ($tach->getProject() === $this) {
-                $tach->setProject(null);
+            if ($image->getTache() === $this) {
+                $image->setTache(null);
             }
         }
 
         return $this;
     }
-
 }

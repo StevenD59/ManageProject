@@ -20,7 +20,7 @@ class TacheController extends AbstractController
      */
     public function index(TacheRepository $tacheRepository): Response
     {
-        return $this->render('tache/index.html.twig', [
+        return $this->render('admin/tache/index.html.twig', [
             'taches' => $tacheRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class TacheController extends AbstractController
             return $this->redirectToRoute('tache_index');
         }
 
-        return $this->render('tache/new.html.twig', [
+        return $this->render('admin/tache/new.html.twig', [
             'tache' => $tache,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class TacheController extends AbstractController
      */
     public function show(Tache $tache): Response
     {
-        return $this->render('tache/show.html.twig', [
+        return $this->render('admin/tache/show.html.twig', [
             'tache' => $tache,
         ]);
     }
@@ -72,7 +72,7 @@ class TacheController extends AbstractController
             return $this->redirectToRoute('tache_index');
         }
 
-        return $this->render('tache/edit.html.twig', [
+        return $this->render('admin/tache/edit.html.twig', [
             'tache' => $tache,
             'form' => $form->createView(),
         ]);

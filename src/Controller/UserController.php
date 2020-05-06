@@ -12,10 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
- * @Route("/admin")
- */
-
 
 class UserController extends AbstractController
 {
@@ -34,7 +30,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / INDEX-SHOWALL ----------------------
 
     /**
-     * @Route("/users", name="admin_index")
+     * @Route("admin/users", name="admin_index")
      */
     public function index()
     {
@@ -48,7 +44,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / CREATE ----------------------
 
     /**
-     * @Route("/new", name="new_user_admin")
+     * @Route("admin/new", name="new_user_admin")
      */
     public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
@@ -74,7 +70,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / INDEX-SHOWById ----------------------
 
     /**
-     * @Route("/show/{id}", name="show_user_admin", methods={"GET"})
+     * @Route("admin/show/{id}", name="show_user_admin", methods={"GET"})
      */
     public function show_user(User $user)
     {
@@ -87,7 +83,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / EDIT ----------------------
 
     /**
-     * @Route("/edit/{id}", name="edit_user_admin", methods={"GET","POST"})
+     * @Route("admin/edit/{id}", name="edit_user_admin", methods={"GET","POST"})
      */
     public function edit_user(Request $request, User $user): Response
     {
@@ -113,7 +109,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / DELETE ----------------------
 
     /**
-     * @Route("/delete/{id}", name="delete_user_admin", methods={"DELETE"})
+     * @Route("admin/delete/{id}", name="delete_user_admin", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {

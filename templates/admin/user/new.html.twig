@@ -22,6 +22,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label mx-auto">Email:</label>
                     <div class="col-sm-8 mx-auto">
+                        {{ form_errors(form.mail) }}
                         {{ form_widget(form.mail) }}
                     </div>
                 </div>

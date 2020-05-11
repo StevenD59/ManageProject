@@ -9,6 +9,8 @@ use App\Form\CommentaireType;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,11 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-/**
- * Class ProjectController
- * @package App\Controller
- * @Route("/project")
- */
+
 
 class ProjectController extends AbstractController
 {
@@ -35,9 +33,10 @@ class ProjectController extends AbstractController
         $this->projectRepository = $projectRepository;
     }
 
+//    ------------------------------- CRUD PROJECT / ADMIN ---------------------------------
 
     /**
-     * @Route("/", name="project_index", methods={"GET"})
+     * @Route("/projects", name="project_index", methods={"GET"})
      */
     public function index(ProjectRepository $projectRepository): Response
     {
@@ -49,7 +48,8 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="project_new", methods={"GET","POST"})
+     * @Route("admin/project/new", name="project_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request, UserRepository $userRepository, UserInterface $userTest): Response
     {
@@ -80,9 +80,9 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="project_show", methods={"GET","POST"})
+     * @Route("project/show/{id}", name="project_show", methods={"GET","POST"})
      */
-    public function show(Project $project, UserRepository $userRepository, Request $request): Response
+        public function show(Project $project, UserRepository $userRepository, Request $request): Response
     {
 
         $commentaire = new Commentaire();
@@ -111,7 +111,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="project_edit", methods={"GET","POST"})
+     * @Route("admin/project/{id}/edit", name="project_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Project $project): Response
     {
@@ -133,7 +133,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="project_delete", methods={"DELETE"})
+     * @Route("admin/project/{id}", name="project_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Project $project): Response
     {
@@ -145,8 +145,6 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('project_index');
     }
-
-
 
 
 }

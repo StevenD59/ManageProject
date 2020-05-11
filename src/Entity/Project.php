@@ -73,6 +73,7 @@ class Project
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="project", orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $commentaires;
 
@@ -84,6 +85,7 @@ class Project
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Tache", mappedBy="project", orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $taches;
 

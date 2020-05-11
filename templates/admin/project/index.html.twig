@@ -4,11 +4,13 @@
     <div class="col-12 col-md-10 text-center">
         <h1 class="my-3">Liste des projets</h1>
 
+        {% if app.user.role != "ROLE_USER" %}
         <div class="text-right">
             <a href="{{ path('project_new') }}">
                 <button type="submit" class="btn btn-light my-3">Ajouter un projet</button>
             </a>
         </div>
+        {% endif %}
 
         <table class="table">
             <thead>
@@ -34,12 +36,14 @@
                                 <a class="btn btn-secondary"
                                    href="{{ path('project_show', {'id' : projet.id }) }}">Voir</a>
                             </div>
+                            {% if app.user.role != "ROLE_USER" %}
                             <div>
                                 <a class="btn btn-secondary" href="{{ path('project_edit', {'id' : projet.id }) }}">Modifier</a>
                             </div>
                             <div>
                                 {{ include('admin/project/_delete_form.html.twig') }}
                             </div>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>

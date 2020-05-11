@@ -56,7 +56,7 @@ class Commentaire
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Tache", inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $tache;
 

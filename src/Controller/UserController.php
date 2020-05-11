@@ -44,7 +44,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / CREATE ----------------------
 
     /**
-     * @Route("admin/new", name="new_user_admin")
+     * @Route("admin/users/new", name="new_user_admin")
      */
     public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
@@ -70,7 +70,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / INDEX-SHOWById ----------------------
 
     /**
-     * @Route("admin/show/{id}", name="show_user_admin", methods={"GET"})
+     * @Route("admin/user/show/{id}", name="show_user_admin", methods={"GET"})
      */
     public function show_user(User $user)
     {
@@ -83,7 +83,7 @@ class UserController extends AbstractController
     //    -------------- CRUD USER / EDIT ----------------------
 
     /**
-     * @Route("admin/edit/{id}", name="edit_user_admin", methods={"GET","POST"})
+     * @Route("admin/user/edit/{id}", name="edit_user_admin", methods={"GET","POST"})
      */
     public function edit_user(Request $request, User $user): Response
     {

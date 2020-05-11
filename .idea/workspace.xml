@@ -3,15 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="80768667-586e-4b52-a0cc-e6affd7c7e76" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TacheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TacheController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProjectController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/tache/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/tache/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/tache/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/tache/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/tache/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/tache/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Commentaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Commentaire.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/partial/menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partial/menu.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/project/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/project/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,21 +144,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/compte/partial" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Clone\ManageProject\templates\compte\partial" />
+      <recent name="C:\wamp64\www\Clone\ManageProject\templates\compte" />
+      <recent name="C:\wamp64\www\ManageProject\public\assets\img" />
+      <recent name="C:\wamp64\www\ManageProject\public\assets\js" />
+      <recent name="C:\wamp64\www\ManageProject\public\assets\css" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\Clone\ManageProject\templates\admin" />
       <recent name="C:\wamp64\www\Clone\ManageProject\public\assets\img" />
       <recent name="C:\wamp64\www\ManageProject\templates\admin" />
       <recent name="C:\wamp64\www\ManageProject\img" />
       <recent name="C:\wamp64\www\ManageProject\require" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\ManageProject\public\assets\img" />
-      <recent name="C:\wamp64\www\ManageProject\public\assets\js" />
-      <recent name="C:\wamp64\www\ManageProject\public\assets\css" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -194,7 +193,9 @@
       <workItem from="1588520287913" duration="5358000" />
       <workItem from="1588576350798" duration="10150000" />
       <workItem from="1588664148961" duration="4484000" />
-      <workItem from="1588750622401" duration="8547000" />
+      <workItem from="1588750622401" duration="8961000" />
+      <workItem from="1588938642864" duration="5938000" />
+      <workItem from="1589184711175" duration="7797000" />
     </task>
     <servers />
   </component>
@@ -214,11 +215,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824/1920.0.1280.728@0.0.1536.824" timestamp="1587558399229" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1588667315025">
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1589184719219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1280.728@0.0.1536.824" timestamp="1587558101066" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1588667315025" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1589184719219" />
     <state x="24" y="0" width="738" height="824" key="find.popup" timestamp="1588159426855">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

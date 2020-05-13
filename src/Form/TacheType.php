@@ -3,7 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Tache;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,16 +18,30 @@ class TacheType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('description')
-            ->add('date_debut')
-            ->add('date_fin')
+            ->add('description', TextareaType::class)
+            ->add('date_debut', DateType::class, [
+                'widget' => 'single_text',
+                'html5'=> false,
+                'format' => 'yyyy-MM-dd',
+                'translation_domain' => false])
+            ->add('date_fin', DateType::class, [
+                'widget' => 'single_text',
+                'html5'=> false,
+                'format' => 'yyyy-MM-dd',
+                'translation_domain' => false
+                ])
             ->add('statut')
-            ->add('date_add')
-            ->add('date_update')
-            ->add('date_delete')
-
-            ->add('project')
-            ->add('user')
+            ->add('images', FileType::class, [
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
+            ])
+            ->add('user', EntityType::class, [
+                'class'=> User::class,
+                'choice_label'=>'nom',
+                'expanded'=>true
+            ])
         ;
     }
 

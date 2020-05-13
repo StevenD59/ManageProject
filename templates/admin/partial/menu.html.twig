@@ -1,4 +1,4 @@
-{% if app.user.role != "ROLE_USER" %}
+{% if is_granted('ROLE_ADMIN') %}
 <div class="d-none d-md-block col-md-2 backgroundMenu text-center">
         <ol class="liste p-0 mt-3">
             <li><a class="lien" href="{{ path('project_index') }}">- Gestion des projets</a></li>

@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
+use App\Entity\Project;
 use App\Entity\Tache;
+use App\Entity\User;
 use App\Form\TacheType;
 use App\Repository\TacheRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,20 +32,36 @@ class TacheController extends AbstractController
     /**
      * @Route("/new", name="tache_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserRepository $userRepository): Response
     {
         $tache = new Tache();
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
-
+        $project = new Project();
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($tache);
-            $entityManager->flush();
+            $images = $form->get('images')->getData();
+            // On boucle sur les images
+            foreach ($images as $image) {
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+                // On crée l'image dans la base de données
+                $img = new Image();
+                $img->setNom($fichier);
+                $tache->addImage($img);
+                $tache->setProject($project);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($tache);
+                $entityManager->flush();
 
+                
+            }
             return $this->redirectToRoute('tache_index');
         }
-
         return $this->render('admin/tache/new.html.twig', [
             'tache' => $tache,
             'form' => $form->createView(),
@@ -83,7 +103,7 @@ class TacheController extends AbstractController
      */
     public function delete(Request $request, Tache $tache): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$tache->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $tache->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($tache);
             $entityManager->flush();

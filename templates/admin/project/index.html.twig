@@ -4,7 +4,7 @@
     <div class="col-12 col-md-10 text-center">
         <h1 class="my-3">Liste des projets</h1>
 
-        {% if app.user.role != "ROLE_USER" %}
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="text-right">
             <a href="{{ path('project_new') }}">
                 <button type="submit" class="btn btn-light my-3">Ajouter un projet</button>
@@ -36,7 +36,7 @@
                                 <a class="btn btn-secondary"
                                    href="{{ path('project_show', {'id' : projet.id }) }}">Voir</a>
                             </div>
-                            {% if app.user.role != "ROLE_USER" %}
+                            {% if is_granted('ROLE_ADMIN') %}
                             <div>
                                 <a class="btn btn-secondary" href="{{ path('project_edit', {'id' : projet.id }) }}">Modifier</a>
                             </div>

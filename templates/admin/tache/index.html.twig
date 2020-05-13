@@ -1,17 +1,10 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block body %}
-    {% extends 'admin/index.html.twig' %}
 
     {% block body %}
         <div class="col-12 col-md-10 text-center">
             <h1 class="my-3">Liste des  tâches</h1>
 
-            <div class="text-right">
-                <a href="{{ path('project_new') }}">
-                    <button type="submit" class="btn btn-light my-3">Ajouter un projet</button>
-                </a>
-            </div>
 
             <table class="table">
                 <thead>
@@ -52,5 +45,3 @@
 
         </div>
     {% endblock %}
-
-{% endblock %}

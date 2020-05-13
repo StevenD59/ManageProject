@@ -51,7 +51,7 @@ class ProjectController extends AbstractController
      * @Route("admin/project/new", name="project_new", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
-    public function new(Request $request, UserRepository $userRepository, UserInterface $userTest): Response
+    public function new(Request $request, UserRepository $userRepository, User  $userTest): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
@@ -112,6 +112,7 @@ class ProjectController extends AbstractController
 
     /**
      * @Route("admin/project/{id}/edit", name="project_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Project $project): Response
     {
@@ -134,6 +135,7 @@ class ProjectController extends AbstractController
 
     /**
      * @Route("admin/project/{id}", name="project_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Project $project): Response
     {

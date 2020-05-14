@@ -1,55 +1,57 @@
 {% extends 'admin/index.html.twig' %}
 
 {% block body %}
-    <div class="col-12 col-md-10 text-center">
-        <h1 class="my-3">Liste des projets</h1>
+	<div class="col-12 col-md-10 text-center">
+		<h1 class="my-3">Liste des projets</h1>
 
-        {% if is_granted('ROLE_ADMIN') %}
-        <div class="text-right">
-            <a href="{{ path('project_new') }}">
-                <button type="submit" class="btn btn-light my-3">Ajouter un projet</button>
-            </a>
-        </div>
-        {% endif %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<div class="text-right">
+				<a href="{{ path('project_new') }}">
+					<button type="submit" class="btn btn-light my-3">Ajouter un projet</button>
+				</a>
+			</div>
+		{% endif %}
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th class="col-6">Nom du projet</th>
-                <th class="col-6">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for projet in project %}
-                <tr>
-                    <th scope="row">{{ projet.nom }}</th>
-                    <td class="pt-3 d-md-none ">
-                        <div class="d-flex justify-content-around">
-                            <i class="fas fa-search fa-lg"></i>
-                            <i class="fas fa-edit fa-lg"></i>
-                            <i class="fas fa-trash-alt fa-lg"></i>
-                        </div>
-                    </td>
-                    <td class="d-none d-md-block">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <div>
-                                <a class="btn btn-secondary"
-                                   href="{{ path('project_show', {'id' : projet.id }) }}">Voir</a>
-                            </div>
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <div>
-                                <a class="btn btn-secondary" href="{{ path('project_edit', {'id' : projet.id }) }}">Modifier</a>
-                            </div>
-                            <div>
-                                {{ include('admin/project/_delete_form.html.twig') }}
-                            </div>
-                            {% endif %}
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="col-6">Nom du projet</th>
+					<th class="col-6">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for projet in project %}
+					<tr>
+						<th scope="row">{{ projet.nom }}</th>
+						<td class="pt-3 d-md-none ">
+							<div class="d-flex justify-content-around">
+								<i class="fas fa-search fa-lg"></i>
+								<i class="fas fa-edit fa-lg"></i>
+								<i class="fas fa-trash-alt fa-lg"></i>
+							</div>
+						</td>
+						<td class="d-none d-md-block">
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<div>
+									<a class="btn btn-secondary" href="{{ path('project_show', {'id' : projet.id }) }}">Voir</a>
+								</div>
+								{% if is_granted('ROLE_ADMIN') %}
+									<div>
+										<a class="btn btn-secondary" href="{{ path('tache_index', {'id' : projet.id }) }}">Gestion</a>
+									</div>
+									<div>
+										<a class="btn btn-secondary" href="{{ path('project_edit', {'id' : projet.id }) }}">Modifier</a>
+									</div>
+									<div>
+										{{ include('admin/project/_delete_form.html.twig') }}
+									</div>
+								{% endif %}
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-    </div>
+	</div>
 {% endblock %}

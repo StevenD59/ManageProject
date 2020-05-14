@@ -29,12 +29,12 @@ class Tache
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date")
      */
     private $date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date")
      */
     private $date_fin;
 
@@ -81,7 +81,7 @@ class Tache
     private $commentaires;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="tache", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="tache", orphanRemoval=true, cascade={"persist"})
      */
     private $images;
 
@@ -122,24 +122,24 @@ class Tache
         return $this;
     }
 
-    public function getDateDebut(): ?string
+    public function getDateDebut(): ?\DateTimeInterface
     {
         return $this->date_debut;
     }
 
-    public function setDateDebut(string $date_debut): self
+    public function setDateDebut(\DateTimeInterface $date_debut): self
     {
         $this->date_debut = $date_debut;
 
         return $this;
     }
 
-    public function getDateFin(): ?string
+    public function getDateFin(): ?\DateTimeInterface
     {
         return $this->date_fin;
     }
 
-    public function setDateFin(string $date_fin): self
+    public function setDateFin(\DateTimeInterface $date_fin): self
     {
         $this->date_fin = $date_fin;
 

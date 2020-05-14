@@ -47,6 +47,12 @@ class Image
      */
     private $tache;
 
+    public function __construct()
+    {
+        $this->date_add = new \DateTime();
+        $this->activate = 1;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

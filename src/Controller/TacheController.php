@@ -7,6 +7,7 @@ use App\Entity\Project;
 use App\Entity\Tache;
 use App\Entity\User;
 use App\Form\TacheType;
+use App\Repository\ProjectRepository;
 use App\Repository\TacheRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,24 +21,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class TacheController extends AbstractController
 {
     /**
-     * @Route("/", name="tache_index", methods={"GET"})
+     * @Route("/{id}", name="tache_index", methods={"GET"})
      */
-    public function index(TacheRepository $tacheRepository): Response
+    public function index(TacheRepository $tacheRepository, Project $project): Response
     {
+        $listTaches = $tacheRepository->findBy(['project'=> $project->getId()]);
+        
         return $this->render('admin/tache/index.html.twig', [
-            'taches' => $tacheRepository->findAll(),
+            'projectId' => $project->getId(),
+            'taches' => $listTaches,
         ]);
     }
 
     /**
-     * @Route("/new", name="tache_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="tache_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserRepository $userRepository): Response
+    public function new(Request $request, UserRepository $userRepository, ProjectRepository $projectRepository, Project $project): Response
     {
         $tache = new Tache();
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
-        $project = new Project();
         if ($form->isSubmitted() && $form->isValid()) {
             $images = $form->get('images')->getData();
             // On boucle sur les images
@@ -46,9 +49,8 @@ class TacheController extends AbstractController
                 $fichier = md5(uniqid()) . '.' . $image->guessExtension();
                 // On copie le fichier dans le dossier uploads
                 $image->move(
-                    $this->getParameter('images_directory'),
-                    $fichier
-                );
+                $this->getParameter('upload_directory'),
+                $fichier);
                 // On crée l'image dans la base de données
                 $img = new Image();
                 $img->setNom($fichier);
@@ -60,9 +62,9 @@ class TacheController extends AbstractController
 
                 
             }
-            return $this->redirectToRoute('tache_index');
         }
         return $this->render('admin/tache/new.html.twig', [
+            'id'=> $project->getId(),
             'tache' => $tache,
             'form' => $form->createView(),
         ]);

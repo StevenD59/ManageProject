@@ -19,6 +19,7 @@ class TacheType extends AbstractType
         $builder
             ->add('nom')
             ->add('description', TextareaType::class)
+            ->add('statut')
             ->add('date_debut', DateType::class, [
                 'widget' => 'single_text',
                 'html5'=> false,
@@ -30,7 +31,6 @@ class TacheType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 'translation_domain' => false
                 ])
-            ->add('statut')
             ->add('images', FileType::class, [
                 'label' => false,
                 'multiple' => true,
